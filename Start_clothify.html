@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clothify | Start Your Style Journey</title>
+
+    <!-- Google Fonts for Stylish Text -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="username.css">
+
+    <!-- CSS Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            position: relative; 
+            overflow-y: auto; 
+            height: 100vh; 
+        }
+    
+        /* Background Video */
+        .background-video {
+            position: fixed; 
+            top: 0;
+            left: 0; 
+            width: 100vw; 
+            height: 100vh; 
+            z-index: -1; 
+            object-fit: cover; 
+        }
+    
+        header {
+            background-color: rgb(7, 168, 168); 
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+    
+        header h1 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 5rem;
+            letter-spacing: 2px;
+        }
+    
+        .container {
+            width: 85%;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative; 
+            z-index: 1; 
+        }
+    
+        footer {
+            background-color: rgba(51, 51, 51, 0.8); 
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+    
+        footer p {
+            font-size: 0.9rem;
+        }
+    
+        .content {
+            text-align: center;
+            padding: 50px 0;
+            color: white;
+        }
+    
+        .content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+    
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+    
+        /* Container for all the feature boxes */
+        .feature-box-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            flex-wrap: wrap; 
+        }
+
+        /* Individual feature box styling */
+        .feature-box {
+            background-color: rgba(255, 255, 255, 0.25); 
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            width: 30%;
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease; 
+            margin-bottom: 20px;
+        }
+
+        /* Hover effect on the feature box */
+        .feature-box:hover {
+            transform: scale(1.05); 
+            z-index: 2; 
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2); 
+        }
+
+        
+        .feature-box p {
+            font-size: 1rem;
+            color: #ffffff;
+            margin-top: 10px;
+            opacity: 0; 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: opacity 0.6s ease, max-height 0.6s ease;
+        }
+
+        
+        .feature-box:hover p {
+            opacity: 1; /* Fade in text */
+            max-height: 1000px; 
+            overflow: visible; 
+            transition: opacity 0.6s ease, max-height 0.6s ease; 
+        }
+
+    
+        /* Feature Button Styles */
+        .feature-button {
+            --c: #fff;
+            background: linear-gradient(90deg, #0000 33%, #fff5, #0000 67%) var(--_p,100%)/300% no-repeat, teal;
+            color: #0000;
+            border: none;
+            transform: perspective(500px) rotateY(calc(20deg * var(--_i, -1)));
+            text-shadow: calc(var(--i, -1) * 0.08em) -0.01em 0 var(--c),
+                        calc(var(--_i, -1) * -0.08em) 0.01em 2px #0004;
+            outline-offset: 0.1em;
+            transition: 0.3s;
+            font-family: system-ui, sans-serif;
+            font-weight: bold;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5em 1em;
+            border-radius: 30px;
+            display: inline-block;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: larger;
+        }
+    
+        .feature-button:hover,
+        .feature-button:focus-visible {
+            --_p: 0%;
+            --_i: 1;
+        }
+    
+        .feature-button:active {
+            text-shadow: none;
+            color: var(--c);
+            box-shadow: inset 0 0 9em #0005;
+            transition: 0s;
+        }
+    
+        .back-home-button {
+            font-size: 1.2em;
+            background-color: #FF6F61;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 50px;
+        }
+    
+        .back-home-button:hover {
+            background-color: teal; 
+            transform: translateY(-10px); 
+            box-shadow: 0 7px 0 -2px lightgreen,
+                        0 15px 0 -4px lightseagreen,
+                        0 16px 10px -3px  rgb(25, 137, 132); 
+        }
+    
+        .back-home-button:active{
+            transition: all 0.2s; 
+            transform: translateY(-5px); 
+            box-shadow: 0 2px 0 -2px lightgreen,
+                        0 8px 0 -4px lightseagreen,
+                        0 12px 10px -3px rgb(25, 137, 132);
+        }
+    
+        .key-point {
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            color: #fff; 
+            margin-top: 10px; 
+            display: block; 
+        }
+    
+    </style>
+    
+</head>
+<body>
+    <!-- Background Video -->
+    <video autoplay muted loop class="background-video">
+        <source src="Images/Video4.mp4" type="video/mp4"> <!-- Replace with your video file path -->
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Header -->
+    <header>
+        <h1>
+        <a href="home_clothify.html" style="text-decoration: none; color: inherit;">Clothify</a>
+        </h1>
+        <p style="margin-top: -20px;">Your Virtual Wardrobe Planner</p>
+        <div class="user-container" onclick="toggleButtons()">
+            <span class="username">
+                <span id="username">User Name</span>
+            </span>
+            
+            <!-- Logout Button (Initially hidden) -->
+            <button id="logout-btn" class="Btn">
+                <div class="sign">
+                    <svg viewBox="0 0 512 512">
+                        <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                    </svg>
+                </div>
+                <div class="text" onclick="logout()">Logout</div>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content">
+            <h2>Welcome to Clothify, <span id="username-placeholder">Guest</span>!</h2>
+
+            <p>Start planning your perfect wardrobe today.</p>
+
+            <!-- Feature Boxes with Buttons Above Text -->
+            <div class="feature-box-container">
+                <div class="feature-box">
+                    <a href="upload_clothes.html" class="feature-button">Upload Your Clothes</a>
+                    <p>
+                        <span class="key-point"><strong>Photo Upload:</strong></span><br>
+                        - Users can take or upload photos of their clothing items directly from their devices.<br>
+                        - Support for multiple file formats (JPEG, PNG, etc.).<br>
+                        <br>
+                
+                        <span class="key-point"><strong>Categorization:</strong></span><br>
+                        - Users can categorize their items based on type (e.g., tops, bottoms, dresses, shoes, accessories).<br>
+                        - Option to add tags for better organization (e.g., casual, formal, seasonal).<br>
+                        <br>
+                
+                        <span class="key-point"><strong>Detailed Descriptions:</strong></span><br>
+                        - Users can enter descriptions for each clothing item, including brand, size, color, and fabric type.<br>
+                        - Option to include care instructions or notes about the item.<br>
+                        <br>
+                
+                        <span class="key-point"><strong>Editing and Updating:</strong></span><br>
+                        - Ability to edit details of the uploaded items later (e.g., change the photo, update the description).<br>
+                        - Mark items as "available" or "unavailable" to manage wardrobe status.<br>
+                        <br>
+                
+                        <span class="key-point"><strong>Outfit Suggestions:</strong></span><br>
+                        - Based on uploaded items, the system can suggest potential outfits or combinations.<br>
+                        - Users can save outfit combinations for future reference.<br>
+                        <br>
+                    </p>
+                </div>
+                <div class="feature-box">
+                    <a href="random_outfit.html" class="feature-button">Random Outfit Generator</a>
+                    <p>
+                        <strong style="font-size: 1.2rem;">User's Wardrobe Integration:</strong><br>
+                        - The generator pulls from a user’s uploaded or categorized clothing items, which may include tops, bottoms, dresses, shoes, and accessories.<br>
+                        <br>
+                        <strong style="font-size: 1.2rem;">Algorithmic Selection:</strong><br>
+                        - Using algorithms or predefined rules, the generator selects a mix of items to create a complete outfit. It may consider factors like color coordination, style compatibility, and seasonal appropriateness.<br>
+                        <br>
+                        <strong style="font-size: 1.2rem;">Randomization:</strong><br>
+                        - The core functionality of the generator is to provide random combinations, which helps users discover new ways to wear existing items. This can lead to more creative outfit choices that users might not have considered themselves.<br>
+                        <br>
+                        <strong style="font-size: 1.2rem;">User Preferences:</strong><br>
+                        - Some generators allow users to set preferences, such as style type (casual, formal), color palettes, or specific clothing items to include or exclude from the suggestions.<br>
+                        <br>
+                        <strong style="font-size: 1.2rem;">Outfit Saving:</strong><br>
+                        - Users may have the option to save the suggested outfits for future reference, allowing them to quickly select outfits they liked without having to generate them again.<br>
+                        <br>
+                        
+                    </p>
+                </div>
+                <div class="feature-box">
+                    <a href="plan_week.html" class="feature-button">Plan Your Week</a>
+                    <p>
+                        <span style="font-weight: bold; font-size: 1.2em;">Weekly Outfit Scheduling:</span><br>
+                        Users can select specific outfits from their wardrobe for each day of the week, allowing them to plan their looks in advance.<br><br>
+                
+                        <span style="font-weight: bold; font-size: 1.2em;">Calendar Integration:</span><br>
+                        The feature could integrate with a calendar application to remind users of their planned outfits for each day, making it easier to keep track of their style choices.<br><br>
+                
+                        <span style="font-weight: bold; font-size: 1.2em;">Flexibility and Adjustments:</span><br>
+                        Users might have the option to modify their selections throughout the week based on changes in plans, weather conditions, or personal preferences.<br><br>
+                
+                        <span style="font-weight: bold; font-size: 1.2em;">Themed Days:</span><br>
+                        It could allow users to create themed days (like "Casual Monday," "Formal Friday," etc.) to keep their style interesting and varied.<br><br>
+                
+                        <span style="font-weight: bold; font-size: 1.2em;">Suggestions Based on Events:</span><br>
+                        The tool may suggest outfits based on planned events or occasions, ensuring users are appropriately dressed for meetings, social gatherings, or other activities.<br><br>
+                
+                        </p>
+                </div>
+            </div>
+
+            <!-- Back to Home Button -->
+            <a href="home_clothify.html" class="back-home-button">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Clothify. All Rights Reserved.</p>
+    </footer>
+    <script src="username.js"></script>
+    <script>
+        
+        // This is an example, adjust depending on how you store the username
+        let username = localStorage.getItem('username') || 'Guest'; 
+        
+        // Display the username in the placeholder
+        document.getElementById('username-placeholder').innerText = username;
+    </script>  
+</body>
+</html>

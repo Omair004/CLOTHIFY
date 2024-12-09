@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clothify | Login / Sign Up</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Styles -->
+    <style>
+        h1 a {
+            color: white; 
+            text-decoration: none; 
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 3rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            overflow: hidden; /* Ensures video covers the background */
+        }
+
+        header {
+            text-align: center;
+            background-color: #FF6F61; 
+            padding: 20px 0;
+            color: white; 
+            width: 100%;
+            position: absolute;
+            top: 0;
+            z-index: 2;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        p {
+            margin-top: 5px;
+        }
+
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .auth-container {
+            margin-top: 120px;
+            background-color: rgba(255, 255, 255);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            height: 600px;
+            z-index: 3;
+            overflow: auto;
+            position: relative;
+        }
+
+        h2 {
+            text-align: center;
+            color: #FF6F61;
+            margin-bottom: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .tab {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .tab button {
+            background-color: transparent;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .tab button.active {
+            color: #FF6F61;
+            border-bottom: 2px solid #FF6F61;
+        }
+
+        .tab button:hover {
+            color: #FF6F61;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 35px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 0.9rem;
+            color: #FF6F61;
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF6F61;
+            color: #fff;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-button:hover {
+            background-color: #ff4f41;
+        }
+
+        .auth-options {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .auth-options a {
+            color: #FF6F61;
+            text-decoration: none;
+        }
+
+        .auth-options a:hover {
+            text-decoration: underline;
+        }
+
+        .google-signin-button {
+            background-color: #4285F4;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .google-signin-button:hover {
+            background-color: #357AE8;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop class="background-video">
+        <source src="Images/Video2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <header>
+        <h1>
+            <a href="home_clothify.html">Clothify</a>
+        </h1>
+        <p>Your Virtual Wardrobe Planner</p>
+    </header>
+
+    <div class="auth-container">
+        <h2>Clothify</h2>
+        <div class="tab">
+            <button id="login-tab" class="active" onclick="showLogin()">Login</button>
+            <button id="signup-tab" onclick="showSignup()">Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="form-content">
+            <form>
+                <div class="form-group">
+                    <label for="email-login">Email</label>
+                    <input type="email" id="email-login" required>
+                </div>
+                <div class="form-group">
+                    <label for="password-login">Password</label>
+                    <input type="password" id="password-login" required>
+                    <button type="button" class="show-password" onclick="togglePassword('password-login', this)">Show</button>
+                </div>
+                <button type="submit" class="auth-button">Login</button>
+            </form>
+            <div class="auth-options">
+                <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up here</a></p>
+            </div>
+
+            <!-- Google Sign-In Button -->
+            <div class="google-signin-button" id="google-signin" onclick="handleGoogleSignIn()">
+                Sign in with Google
+            </div>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div id="signup-form" class="form-content" style="display: none;">
+            <form>
+                <div class="form-group">
+                    <label for="username-signup">Username</label>
+                    <input type="text" id="username-signup" required>
+                </div>
+                <div class="form-group">
+                    <label for="email-signup">Email</label>
+                    <input type="email" id="email-signup" required>
+                </div>
+                <div class="form-group">
+                    <label for="password-signup">Password</label>
+                    <input type="password" id="password-signup" required>
+                    <button type="button" class="show-password" onclick="togglePassword('password-signup', this)">Show</button>
+                </div>
+                <button type="submit" class="auth-button">Sign Up</button>
+            </form>
+            <div class="auth-options">
+                <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        function showLogin() { 
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("signup-form").style.display = "none";
+            document.getElementById("login-tab").classList.add("active");
+            document.getElementById("signup-tab").classList.remove("active");
+        }
+
+        function showSignup() { 
+            document.getElementById("signup-form").style.display = "block";
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("signup-tab").classList.add("active");
+            document.getElementById("login-tab").classList.remove("active");
+        }
+
+        function togglePassword(inputId, button) { 
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                button.textContent = 'Hide';
+            } else {
+                input.type = 'password';
+                button.textContent = 'Show';
+            }
+        }
+
+        function handleGoogleSignIn() {  
+            const auth2 = gapi.auth2.getAuthInstance();
+            auth2.signIn().then(function (user) {
+                console.log("User signed in:", user);
+            });
+        }
+
+        
+        document.querySelector('#signup-form form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username-signup').value;
+            const email = document.getElementById('email-signup').value;
+            const password = document.getElementById('password-signup').value;
+
+            const user = { username, email, password };
+            localStorage.setItem('user', JSON.stringify(user));  
+
+            alert('User registered successfully! Please log in.');
+            showLogin();
+        });
+
+        document.querySelector('#login-form form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email-login').value;
+            const password = document.getElementById('password-login').value;
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+
+            if (storedUser && storedUser.email === email && storedUser.password === password) {
+                alert('Login successful!');
+                localStorage.setItem('loggedIn', 'true');          
+                localStorage.setItem('username', storedUser.username); 
+                window.location.href = "home_clothify.html";       
+            } else {
+                alert('Invalid email or password');
+            }
+        });      
+    </script>
+</body>
+</html>

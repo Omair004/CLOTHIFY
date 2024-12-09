@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clothify | Your Virtual Wardrobe</title>
+
+    <!-- Google Fonts for Stylish Text -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #FF6F61; /* Coral */
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            position: relative; /* Position relative for absolute children */
+        }
+
+        .brutalist-button {
+            position: absolute; /* Positioning the button absolutely */
+            top: 50%; /* Center vertically relative to header */
+            right: 20px; /* Position from the right */
+            transform: translateY(-50%); /* Centering vertically */
+            background-color: teal; /* Coral color */
+            color: white; /* White text */
+            border: 3px solid white; /* White border */
+            box-shadow: 6px 6px 0 #7FFFD4; /* Shadow effect */
+            transition: all 0.1s ease-out;
+            /* Keeping original styles for the button */
+            width: 169px;
+            height: 60px;
+            cursor: pointer;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .brutalist-button:hover {
+            background-color: lightseagreen; /* Coral hover color */
+            color: #fff;
+        }
+
+        .brutalist-button:active {
+            background-color: #fff; /* White on click */
+            color: #000; /* Black text on click */
+        }
+
+
+        header h1 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 5rem;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            width: 85%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .main-banner {
+            background-image: url('Images/Clothify_img_2.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
+            font-size: 2.2rem;
+        }
+
+        .cta {
+        display: flex; 
+        justify-content: center;
+        align-items: flex-end; 
+        margin-top: 30px; 
+        height: 100px; 
+            }
+
+            .cta-button {
+                width: 150px; 
+                height: 50px; 
+                font-size: 1.2em; /* Font size */
+                cursor: pointer; /* Pointer cursor on hover */
+                background-color: teal; /* Teal background */
+                color: white; /* White text color */
+                border: none; /* No border */
+                border-radius: 25px; /* More rounded look */
+                transition: all .4s; /* Smooth transition */
+                text-decoration: none; /* No underline */
+                display: flex; /* Use flexbox for better alignment */
+                align-items: center; /* Center items vertically */
+                justify-content: center; /* Center items horizontally */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+                padding: 0; /* Remove padding */
+            }
+
+            .cta-button:hover {
+                background-color: #FF6F61; /* Coral color on hover */
+                transform: translateY(-10px); /* Move up on hover */
+                box-shadow: 0 7px 0 -2px #FF6F61,
+                            0 15px 0 -4px #39a2db,
+                            0 16px 10px -3px #39a2db; /* Shadow on hover */
+            }
+
+            .cta-button:active {
+                transition: all 0.2s; /* Quick transition on click */
+                transform: translateY(-5px); /* Move down slightly on click */
+                box-shadow: 0 2px 0 -2px #FF6F61,
+                            0 8px 0 -4px #39a2db,
+                            0 12px 10px -3px #39a2db; /* Shadow on click */
+            }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+        .features {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+        }
+
+        .feature {
+            position: relative; 
+            background-color: teal; 
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 30%;
+            border-radius: 10px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .feature:hover {
+            transform: scale(1.05);
+        }
+
+        .feature h3 {
+            margin: 0; 
+            color: #ffffff;
+            font-weight: bold; /
+        }
+
+        .feature::before,
+        .feature::after {
+            position: absolute;
+            content: "";
+            width: 20%;
+            height: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #FF6F61;
+            transition: all 0.5s;
+            color: #fff;
+            z-index: 0;
+        }
+
+        .feature::before {
+            top: 0;
+            right: 0;
+            border-radius: 0 15px 0 100%;
+        }
+
+        .feature::after {
+            bottom: 0;
+            left: 0;
+            border-radius: 0 100%  0 15px;
+        }
+
+        .feature:hover::before,
+        .feature:hover::after {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            transition: all 0.5s;
+        }
+
+        .feature-1 h3{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .feature-2 h3{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .feature-3 h3{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+
+        .feature-1:hover::after {
+            content: "Take photos of your wardrobe and categorize them for easy outfit planning.";
+        }
+
+        .feature-2:hover::after {
+            content: "Get unique outfit combinations every day, tailored just for you.";
+        }
+
+        .feature-3:hover::after {
+            content: "View and customize your weekly outfits with ease.";
+        }
+
+        /* Hover text styles */
+        .feature:hover::after {
+            font-weight: bold; 
+            font-size: 1rem;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            color: #fff; 
+            padding: 10px; 
+            text-align: center; 
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Clothify</h1>
+        <p style="margin-top: -20px;">Your Virtual Wardrobe Planner</p>
+        <button class="brutalist-button">
+            <div class="button-text">
+                <span>LOGIN / </span>
+                <span>SIGN UP</span>
+            </div>
+        </button>
+    </header>
+    
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="main-banner">
+            <div class="banner-content">
+                <h2>Organize Your Closet, Simplify Your Style</h2>
+                <p>Upload your clothes, let us randomize your outfits!</p>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="feature feature-1">
+                <h3>Upload Your Clothes</h3>
+            </div>
+            <div class="feature feature-2">
+                <h3>Random Outfit Generator</h3>
+            </div>
+            <div class="feature feature-3">
+                <h3>Plan Your Week</h3>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta">
+            <div style="text-align:center;">
+                <a href="#login" class="cta-button">Get Started</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Clothify. All Rights Reserved.</p>
+    </footer>
+    
+</body>
+</html>
+
+
+
+<svg viewBox="0 0 512 512">
+                        <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 
+                    20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 
+                    +0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 
+                    24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 
+                    32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
+                        </path>
+                    </svg>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Upload Clothes | Clothify</title>
+
+    <!-- Google Fonts for Stylish Text -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="username.css"> 
+    <!-- CSS Styles -->
+    <style>
+        /* Existing styles */
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color:rgb(255, 111, 97);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .video-background {
+            position: fixed;  
+            top: 0;
+            left: 0;
+            width: 100%;     
+            height: 100%;     
+            object-fit: cover; 
+            z-index: -1;      
+        }
+
+
+        header {
+            background-color: rgb(255, 111, 97);
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        header a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        header h1 {
+            font-family: 'Georgia', serif;
+            font-size: 3rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        header p {
+            margin-top: -10px;
+            font-size: 1.2rem;
+        }
+
+        .upload-container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            z-index: 1;
+        }
+
+        .upload-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .upload-form input[type="file"] {
+            font-size: 1rem;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 2px solid #FF6F61;
+            border-radius: 5px;
+            width: 70%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-form input[type="file"]:hover {
+            background-color: #FF6F61;
+            color: white;
+            box-shadow: 5px 20px 10px #878686;
+        }
+
+        .upload-form select {
+            padding: 10px;
+            font-size: 1rem;
+            width: 70%;
+            border: 2px solid #FF6F61;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .upload-form select:hover {
+            background-color: rgba(255, 111, 97);
+            border-color: #ffffff;
+            color: white;
+            box-shadow: 5px 20px 10px #878686;
+        }
+
+
+        .upload-form input[type="submit"] {
+            padding: 12px 20px;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            padding-block: 0.5rem;
+            padding-inline: 1.25rem;
+            background-color: rgb(194, 59, 59);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #ffff;
+            gap: 10px;
+            font-weight: bold;
+            border: 3px solid #ffffff4d;
+            outline: none;
+            overflow: hidden;
+            font-size: 15px;
+        }
+
+        .upload-form input[type="submit"]:hover {
+            transform: scale(1.05);
+            border-color: #fff9;
+            background-color: #FF6F61;
+            transition: 0.7s;
+        }
+
+        .upload-form input[type="submit"]:hover::before{
+            animation: shine 2.5s ease-out infinite;
+        }
+
+        .upload-form input[type="submit"]::before {
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 100%;
+        background-image: linear-gradient(
+            120deg,
+            rgba(255, 255, 255, 0) 30%,
+            rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0) 70%
+        );
+        top: 0;
+        left: -100px;
+        opacity: 0.6;
+        }
+
+        .upload-form input[type="submit"]::after{
+            background-color: #FF6F61;
+        }
+
+        @keyframes shine {
+        0% {
+            left: -100px;
+        }
+
+        60% {
+            left: 100%;
+        }
+
+        to {
+            left: 100%;
+        }
+        }
+
+
+        .preview-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .preview-container img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #FF6F61;
+        }
+
+        /* Hidden by default */
+        .action-buttons {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .action-buttons button {
+            background-color: rgb(194, 59, 59);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .action-buttons button:hover {
+            background-color: #FF6F61;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 2px solid #FF6F61;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: rgb(194, 59, 59);
+            color: white;
+        }
+
+        /* Center align content in table cells */
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+
+        .wardrobe-container {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .wardrobe-container h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .square-container {
+            width: 300px;
+            height: 300px;
+            border: 2px solid #FF6F61;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto; 
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 25%;
+        }
+
+        .square-container label {
+            position: absolute;
+            font-size: 18px;
+            color: #888;
+            pointer-events: none;
+            text-align: center;
+        }
+
+        .square-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            display: none; 
+        }
+
+        
+        /* Favorite and Delete buttons styles */
+        .wardrobe-container .favorite-btn,
+        .wardrobe-container .delete-btn {
+            background-color: #Cd7091;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto; 
+        }
+
+        /* Hover effects */
+        .wardrobe-container .favorite-btn:hover {
+            background-color: #Cd7091;
+           
+            transform: scale(1.1);
+        }
+
+        .wardrobe-container .delete-btn:hover {
+            background-color: #FF4444; 
+            transform: scale(1.1);
+        }
+  
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <video class="video-background" autoplay loop muted>
+        <source src="images/video5.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Header -->
+    <header>
+        <a href="home_clothify.html">
+            <h1>Clothify</h1>
+        </a>
+        <p>Your Virtual Wardrobe Planner</p>
+        <div class="user-container" onclick="toggleButtons()">
+            <span class="username">
+                <span id="username">User Name</span>
+            </span>
+            
+            <!-- Logout Button (Initially hidden) -->
+            <button id="logout-btn" class="Btn">
+                <div class="sign">
+                    <svg viewBox="0 0 512 512">
+                        <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                    </svg>
+                </div>
+                <div class="text" onclick="logout()">Logout</div>
+            </button>
+        </div>
+    </header>
+
+    <!-- Upload Clothes Section -->
+    <div class="upload-container">
+        <h2>Upload Your Clothes</h2>
+
+        <!-- Form for Uploading Clothes -->
+        <form class="upload-form" id="upload-form" action="#" method="POST" enctype="multipart/form-data">
+            
+            <!-- New Square Container for Image Upload -->
+            <div class="square-container" onclick="document.getElementById('file-input').click()">
+                <label>Click to Upload Image</label>
+                <!-- Image element for preview -->
+                <img id="image-preview" src="#" alt="Preview" />
+            </div>
+            
+            <!-- Hidden file input -->
+            <input type="file" id="file-input" name="clothing-image" accept="image/*" style="display: none;" onchange="previewImage(event)" required>
+            
+            <!-- Category Selector (Type of Clothing) -->
+            <select name="category" required>
+                <option value="" disabled selected>Select Category</option>
+                <option value="t-shirt">T-shirt</option>
+                <option value="pants">Pants</option>
+                <option value="dress">Dress</option>
+                <option value="jacket">Jacket</option>
+                <option value="shoes">Shoes</option>
+            </select>
+
+            <!-- Occasion Selector (Casual, Formal, Party) -->
+            <select name="occasion" required>
+                <option value="" disabled selected>Select Occasion</option>
+                <option value="casual">Casual</option>
+                <option value="formal">Formal</option>
+                <option value="party">Party</option>
+            </select>
+
+            <!-- Submit Button -->
+            <input type="submit" value="Upload" name="submit">
+        </form>
+
+        <!-- Action Buttons (Hidden Initially) -->
+        <div class="action-buttons" id="action-buttons">
+            <button type="button" onclick="uploadMore()">Upload More Clothes</button>
+            <button type="button" onclick="viewWardrobe()">View Wardrobe</button>
+            <button type="button" onclick="setOutfits()">Set Outfits for the Week</button>
+        </div>
+
+        <!-- Wardrobe Section (Hidden by default) -->
+        <div class="wardrobe-container" id="wardrobe-container">
+            <h3>Your Wardrobe</h3>
+            <table id="wardrobe-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Category</th>
+                        <th>Occasion</th>
+                        <th>Favourite</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="wardrobe-items">
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Clothify. All Rights Reserved.</p>
+    </footer>
+    <script src="username.js"></script>
+    <script>
+        
+        let wardrobe = []; 
+
+        // Updated Image preview function
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const output = document.getElementById('image-preview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // Handle form submission (no changes)
+        document.getElementById('upload-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const file = document.querySelector('input[type="file"]').files[0];
+            const category = document.querySelector('select[name="category"]').value;
+            const occasion = document.querySelector('select[name="occasion"]').value;
+
+            const clothingItem = {
+                image: URL.createObjectURL(file),
+                category: category,
+                occasion: occasion
+            };
+
+            wardrobe.push(clothingItem);
+            document.getElementById('action-buttons').style.display = 'block';
+            document.getElementById('upload-form').reset();
+            document.getElementById('image-preview').style.display = 'none';
+        });
+
+        function viewWardrobe() {
+            const wardrobeContainer = document.getElementById('wardrobe-container');
+            wardrobeContainer.style.display = 'block';
+
+            const wardrobeItems = document.getElementById('wardrobe-items');
+            wardrobeItems.innerHTML = '';
+
+            wardrobe.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><img src="${item.image}" alt="Clothing Item" width="50" height="50"></td>
+                    <td>${item.category}</td>
+                    <td>${item.occasion}</td>
+                    <td>
+                        <button class="favorite-btn" onclick="toggleFavorite(${index})">
+                            <i class="${item.isFavorite ? 'fas fa-heart' : 'far fa-heart'}"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="delete-btn" onclick="deleteItem(${index})">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                `;
+                wardrobeItems.appendChild(row);
+            });
+        }
+
+            // Function to toggle favorite status
+            function toggleFavorite(index) {
+                wardrobe[index].isFavorite = !wardrobe[index].isFavorite;
+                viewWardrobe();
+            }
+
+            // Function to delete an item
+            function deleteItem(index) {
+                wardrobe.splice(index, 1); 
+                viewWardrobe(); 
+            }
+
+            // Function to reset the form for uploading more clothes
+            function uploadMore() {
+                document.getElementById('upload-form').reset();
+                document.getElementById('image-preview').style.display = 'none';
+                document.getElementById('action-buttons').style.display = 'none'; 
+            }
+
+            // Function to redirect to the Plan Week page
+            function setOutfits() {
+                window.location.href = 'plan_week.html'; 
+            }
+    </script>
+</body>
+</html>

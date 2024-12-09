@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Clothify | Your Virtual Wardrobe</title>
+    <link rel="stylesheet" href="username.css">
+
+
+    <!-- CSS Styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            #user-greeting { font-size: 1.2rem; color: #FF6F61; }
+            
+        }
+
+        header {
+            background-color: #FF6F61; 
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; 
+            
+        }
+
+       
+        header h1 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 5rem;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            width: 85%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .main-banner {
+            background-image: url('Images/Clothify_img_2.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
+            font-size: 2.2rem;
+        }
+
+        .cta {
+            display: flex; 
+            justify-content: center;
+            align-items: flex-end; 
+            margin-top: 30px; 
+            height: 100px; 
+        }
+
+        .cta-button {
+            width: 150px; 
+            height: 50px; 
+            font-size: 1.2em; 
+            cursor: pointer; 
+            background-color: teal; 
+            color: white; 
+            border: none; 
+            border-radius: 25px; 
+            transition: all .4s; 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            padding: 0;
+        }
+
+        .cta-button:hover {
+            background-color: #FF6F61; 
+            transform: translateY(-10px); 
+            box-shadow: 0 7px 0 -2px #FF6F61,
+                        0 15px 0 -4px rgb(243, 103, 52),
+                        0 16px 10px -3px rgb(246, 89, 33);
+        }
+
+        .cta-button:active {
+            transition: all 0.2s; 
+            transform: translateY(-5px);
+            box-shadow: 0 2px 0 -2px #FF6F61,
+                        0 8px 0 -4px rgb(243, 103, 52),
+                        0 12px 10px -3px rgb(246, 89, 33); 
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .feature {
+            position: relative; 
+            background-color: teal; 
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 30%;
+            border-radius: 10px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .feature:hover {
+            transform: scale(1.05);
+        }
+
+        .feature h3 {
+            margin: 0; 
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .feature::before,
+        .feature::after {
+            position: absolute;
+            content: "";
+            width: 20%;
+            height: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #FF6F61;
+            transition: all 0.5s;
+            color: #fff;
+            z-index: 0;
+        }
+
+        .feature::before {
+            top: 0;
+            right: 0;
+            border-radius: 0 15px 0 100%;
+        }
+
+        .feature::after {
+            bottom: 0;
+            left: 0;
+            border-radius: 0 100%  0 15px;
+        }
+
+        .feature:hover::before,
+        .feature:hover::after {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            transition: all 0.5s;
+        }
+
+        .feature:hover::after {
+            font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            z-index: 1;
+            opacity: 0; 
+            transition: opacity 0.4s ease; 
+            transition-delay: 0.5s; 
+        }
+
+        .feature:hover::after {
+            opacity: 1; 
+        }
+
+        .feature-1 h3,
+        .feature-2 h3,
+        .feature-3 h3 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .feature-1:hover::after {
+            content: "Take photos of your wardrobe and categorize them for easy outfit planning.";
+        }
+
+        .feature-2:hover::after {
+            content: "Get unique outfit combinations every day, tailored just for you.";
+        }
+
+        .feature-3:hover::after {
+            content: "View and customize your weekly outfits with ease.";
+        }
+
+        .feature:hover::after {
+            font-weight: bold; 
+            font-size: 1rem;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            color: #fff; 
+            padding: 10px; 
+            text-align: center; 
+            z-index: 1;
+        }
+
+        .crossed-out {
+            text-decoration: line-through;
+            opacity: 0.5; 
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    
+    <header>
+        
+        <h1>Clothify</h1>
+
+        <p style="margin-top: -20px;">Your Virtual Wardrobe Planner</p>
+
+        <!-- user display -->
+        <div class="user-container" onclick="toggleButtons()">
+            <span class="username">
+                <span id="username">User Name</span>
+            </span>
+            
+            <button id="logout-btn" class="Btn">
+                <div class="sign">
+                    <svg viewBox="0 0 512 512">
+                        <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                    </svg>
+                </div>
+                <div class="text" onclick="logout()">Logout</div>
+            </button>
+        
+            <button id="login-btn" class="Btn_2">
+                <a href="login_clothify.html" class="text_2"> 
+                    Login
+                </a> 
+                <div class="sign_2"> 
+                    <svg viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path></svg>
+                </div>
+            </button>
+        </div>        
+        
+    </header>
+    
+
+    <div class="container">
+        
+        <section class="main-banner">
+            <div class="banner-content">
+                <h2>Organize Your Closet, Simplify Your Style</h2>
+                <p>Upload your clothes, let us randomize your outfits!</p>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature feature-1">
+                <h3>Upload Your Clothes</h3>
+            </div>
+            <div class="feature feature-2">
+                <h3>Random Outfit Generator</h3>
+            </div>
+            <div class="feature feature-3">
+                <h3>Plan Your Week</h3>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div style="text-align:center;">
+                
+                <a href="javascript:void(0);" class="cta-button" onclick="checkLogin()">Get Started</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Clothify. All Rights Reserved.</p>
+    </footer>
+
+    <script src="username.js"></script>
+
+    <script>
+        function checkLogin() {
+            
+            if (localStorage.getItem('loggedIn') == 'true') {
+                
+                window.location.href = "Start_clothify.html";
+            } else {
+                
+                alert("Please log in first to get started!"); 
+                window.location.href = "login_clothify.html"; 
+            }
+        }
+
+        
+        function logout() {
+            
+            localStorage.removeItem('loggedIn');
+            localStorage.removeItem('username');
+            
+            window.location.href = "login_clothify.html";
+        }
+
+    </script>
+</body>
+</html>
